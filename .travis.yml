@@ -10,3 +10,11 @@ before_install:
 
 script:
  - bundle exec rspec
+ 
+deploy:
+ provider: heroku
+ api_key: e5989730-7872-4134-86d8-dd8e89c09101
+ app: cryptic-hollows-89241
+ run: "rake db:migrate"
+ on:
+  all_branches: true
