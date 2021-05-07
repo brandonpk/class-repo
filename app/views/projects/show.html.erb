@@ -4,7 +4,7 @@
 
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <%= link_to 'Home', projects_path %>
+    <%= link_to 'Home', root_path %>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,7 +13,7 @@
         <div class="navbar-nav">
 
         <% if !user_signed_in? %>
-            <%= button_to "Sign In", new_user_session_path, method: :new  %>
+          <%= button_to "Sign In", new_user_session_path, method: :new  %>
         <% end %>
             
         </div>
@@ -38,7 +38,7 @@
           <p><center>
           <% if user_signed_in? %>
               <td><%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-info btn-xs' %></td>
-              <td><%= link_to 'Destroy', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+              <td><%= link_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
             <% end %>
           </center></p>
         </div>
