@@ -1,31 +1,109 @@
+<!doctype html>
+<html lang="en">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <%= button_to "Home", projects_path %>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+
+        <% if !user_signed_in? %>
+            <%= button_to "Sign In", new_user_session_path, method: :new  %>
+        <% end %>
+            <% if user_signed_in? %>
+            <%= button_to "Sign Out", destroy_user_session_path, method: :delete  %>
+            <% end %>
+        </div>
+    </div>
+</nav>
+  <body>
+    <p id="notice"><%= notice %></p>
+    <main role="main">
+
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">
+            <% if user_signed_in? %>
+              <%= "Hello, #{current_user.email}" %>
+            <% else %>
+              Welcome
+            <% end %>
+          </h1>
+          <p>Here will be a collection of projects that have taught me something and now demonstrate what I have learned.</p>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        
+        <div class="row">
+        <% @projects.each do |project| %>
+          <div class="col-md-4">
+          <tr>
+            <td><h2><%= project.title %></h2></td>
+            <td><p><%= project.description %></p></td>
+            <td><%= link_to 'Show', project, class: 'btn btn-primary btn-xs' %></td>
+            <% if user_signed_in? %>
+              <td><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-info btn-xs' %></td>
+              <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure you want to do this?' }, class: 'btn btn-danger btn-xs' %></td>
+            <% end %>
+            </tr>
+          </div>
+        <% end %>
+        </div>
+        <hr>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer class="container">
+      <p>Template Credit: <a href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">GetBootstrap Example</a></p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+<!--
+<% provide(:page_title, 'All Projects') %>
 <p id="notice"><%= notice %></p>
-
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to 'View list', projects_path %></li>
+  <li><%= link_to 'New Project', new_project_path %></li>
+</ul>
 <h1>Projects</h1>
-
 <table>
   <thead>
     <tr>
       <th>Title</th>
+      <th>Body</th>
+      <th>Image</th>
       <th>Description</th>
+      <th>Slug</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.title %></td>
         <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <td><%= link_to 'Show', project, class: 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-info btn-xs' %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
+...
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_project_path, class: 'btn btn-success' %>
+-->
